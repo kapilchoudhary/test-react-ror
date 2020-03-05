@@ -1,0 +1,15 @@
+parent = Category.create(name: 'Root', properties: { price: 'decimal' })
+Category.create(name: 'Groceries', category_id: parent.id, inherited_categories: [parent.id], properties: { price: 'decimal' })
+car = Category.create(name: 'Cars', category_id: parent.id, inherited_categories: [parent.id], properties: { price: 'decimal' })
+phone = Category.create(name: 'Mobile Phones', category_id: parent.id, inherited_categories: [parent.id], properties: { price: 'decimal' })
+
+opel = Category.create(name: 'Opel', category_id: car.id, properties: { year: 'integer', mileage: 'integer', petrol_or_diesel: 'text', price: 'decimal' }, inherited_categories: [parent.id] )
+mercedes = Category.create(name: 'Mercedes', inherited_categories: [opel.id, parent.id], category_id: car.id, properties: { year: 'integer', mileage: 'integer', petrol_or_diesel: 'text', price: 'decimal' } )
+tesla = Category.create(name: 'Tesla', properties: { price: 'decimal', year: 'integer', mileage: 'integer' }, category_id: car.id, inherited_categories: [parent.id])
+apple = Category.create(name: 'Apple', category_id: phone.id, inherited_categories: [parent.id], properties: { price: 'decimal' })
+Category.create(name: 'iPhone', category_id: apple.id, properties: { version: 'integer', system: 'string', price: 'decimal' }, inherited_categories: [parent.id])
+
+Product.create(category_id: opel.id, name: "Opel 1", properties: {"price"=>"450000", "year"=>"2000", "mileage"=>"45", "petrol_or_diesel"=>"petrol"})
+Product.create(category_id: opel.id, name: "Opel 2", properties: {"price"=>"470000", "year"=>"2010", "mileage"=>"65", "petrol_or_diesel"=>"diesel"})
+Product.create(category_id: mercedes.id, name: "Mercedes Benz", properties: {"price"=>"750000", "year"=>"2014", "mileage"=>"60", "petrol_or_diesel"=>"petrol"})
+Product.create(category_id: tesla.id, name: "Tesla 1", properties: {"price"=>"850000", "year"=>"2009", "mileage"=>"70"})
